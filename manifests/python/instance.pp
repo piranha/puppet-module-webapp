@@ -3,6 +3,8 @@ define webapp::python::instance($domain,
                                 $aliases=[],
                                 $owner="www-data",
                                 $group="www-data",
+                                $src="${webapp::python::src_root}/$name",
+                                $venv="${webapp::python::venv_root}/$name",
                                 $mediaroot="",
                                 $mediaprefix="",
                                 $wsgi_module="",
@@ -11,9 +13,6 @@ define webapp::python::instance($domain,
                                 $workers=1,
                                 $monit_memory_limit=300,
                                 $monit_cpu_limit=50) {
-
-  $venv = "${webapp::python::venv_root}/$name"
-  $src = "${webapp::python::src_root}/$name"
 
   $pidfile = "${python::gunicorn::rundir}/${name}.pid"
   $socket = "${python::gunicorn::rundir}/${name}.sock"
